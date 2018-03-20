@@ -1,0 +1,231 @@
+\documentclass{article}
+
+\usepackage[nosection]{incertia}
+
+\pagestyle{fancy}
+\lhead{Will Song}
+\chead{Dirichlet's Theorem}
+\rhead{\today}
+
+\begin{document}
+\begin{df}
+The $n$-th \textbf{cyclotomic polynomial} $\Phi_n$ is defined to be
+\[ \Phi_n(X) = \prod_{\mathclap{\substack{\zeta^n = 1 \\ \zeta^j \neq 1 \\ 0 < j
+< n}}} (X - \zeta), \]
+where $\zeta$ runs over all the primitive $n$-th roots of unity.
+\end{df}
+
+\begin{prop}
+$\deg \Phi_n = \varphi(n)$.
+\end{prop}
+
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{prop}
+$X^n - 1 = \prod_{d \mid n} \Phi_d(X)$.
+\end{prop}
+
+\begin{proof}
+This is a simple exercise in root counting. Recall that $X^n - 1 =
+\prod_{\zeta^n = 1} (X - \zeta)$. For each $\zeta$ such that $\zeta^n = 1$, we
+can define $\ord(\zeta)$ as the smallest $k$ such that $\zeta^k = 1$. Notice
+that $\ord(\zeta) \mid n$. The factor $X - \zeta$ occurs in precisely
+$\Phi_{\ord(\zeta)}(X)$ and nothing else.
+\end{proof}
+
+\begin{cor}
+$n = \sum_{d \mid n} \varphi(d)$.
+\end{cor}
+
+\begin{proof}
+Trivial. Just add the degrees.
+\end{proof}
+
+\begin{prop}
+$\Phi_n(X) \in \ZZ[X]$.
+\end{prop}
+
+\begin{proof}
+We proceed with induction. The base case $\Phi_1(X) = X - 1$ is clearly true.
+
+Now suppose for all $k < n$ we have that $\Phi_k(X) \in \ZZ[X]$. Define
+\[ P_n(X) = \prod_{\mathclap{\substack{d \mid n \\ d \neq n}}} \Phi_d(X). \]
+Clearly $P_n$ is monic. We can then use the division algorithm to find
+integer polynomials $Q(X), R(X)$ such that
+\[ X^n - 1 = P_n(X) Q(X) + R(X) \]
+and $\deg R < \deg P_n = n - \varphi(n)$ or $R(X) = 0$. By plugging in the roots
+of $P_n$, it is easy to see that $R(X)$ must have at least $n - \varphi(n)$
+roots, so if $R$ is non-zero it must have degree at least $n - \varphi(n)$,
+which cannot happen. Thus $R(X) = 0$ and $X^n - 1 = P_n(X) Q(X)$, where $Q(X)
+\in \ZZ[X]$, but $X^n - 1 = P_n(X) \Phi_n(X)$, which gives us $Q(X) = \Phi_n(X)$
+and $\Phi_n(X) \in \ZZ[X]$.
+\end{proof}
+
+\begin{prop}
+$\Phi_n(X)$ is irreducible.
+\end{prop}
+
+\begin{proof}
+We actually don't have enough tools to show this for the general case. It is
+easy to show that $\Phi_p(X + 1)$ is irreducible and thus $\Phi_p(X)$ is also
+irreducible when $p$ is prime though.
+
+Just compute $\Phi_p(X) = 1 + X + X^2 + \cdots + X^{p - 1}$ and apply Eisenstein
+at $X + 1$.
+\end{proof}
+
+We now take some inspiration from standard calculus, and state some properties
+that we will not prove. Note that these hold in $\RR[X]$ and $\ZZ[X]$, but more
+importantly, they are also true in $\FF_p[X]$.
+
+\begin{prop}
+$(f(x) + g(x))' = f'(x) + g'(x)$.
+\end{prop}
+
+\begin{prop}
+$(f(x) g(x))' = f'(x) g(x) + f(x) g'(x)$.
+\end{prop}
+
+We can now prove the following statement.
+
+\begin{prop}
+Let $P$ be a polynomial over either $\RR[X]$, $\QQ[X]$, $\ZZ[X]$, or $\FF_p[X]$.
+Then there exists a non-constant polynomial $m(X)$ such that $m(X)^2 \mid P(X)$
+if and only if $\gcd(P(X), P'(X)) \neq 1$.
+\end{prop}
+
+\begin{proof}
+Suppose there exists such a $m(X)$ such that $m(X)^2 \mid P(X)$. Then $P(X) =
+m(X)^2 Q(X)$ and $P'(X) = 2 m(X) m'(X) Q(X) + m(X)^2 Q'(X)$, so $m(X) \mid
+\gcd(P(X), P'(X))$.
+
+For the other direction, $\gcd(P(X), P'(X)) \neq 1$ implies that they share a
+root $X_0$. We claim that $m(X) = X - X_0$ satisfies the double root property
+for $P(X)$. Suppose not. Then $P(X) = m(X) Q(X)$ and $Q(X_0) \neq 0$. Compute
+$P'(X) = m'(X) Q(X) + m(X) Q'(X)$. Note that $P'(X_0) = 0$ because $X_0$ is a
+root of $P'(X)$, but $P'(X_0) = m'(X_0) Q(X_0) + m(X_0) Q'(X_0) = 1$, which is a
+contradiction.
+\end{proof}
+
+\begin{cor}
+$X^n - 1$ only has roots of multiplicity $1$ in any of the above rings.
+\end{cor}
+
+\begin{prop}
+Let $m, n$ be two positive integers and $p$ a prime such that $p \nmid mn$. Then
+\[ \gcd(\Phi_n(X), \Phi_m(X)) = 1 \]
+over $\FF_p[X]$.
+\end{prop}
+
+\begin{proof}
+By the previous proposition $X^{mn} - 1$ taken in $\FF_p[X]$ has no repeated
+factors. Suppose for the sake of contradiction that $\gcd(\Phi_n(X), \Phi_m(X))
+= g(X) \neq 1$. Then $g(X)^2 \mid X^{mn} - 1$, which is not true. This is
+because $X^{mn} - 1 = \prod_{d \mid mn} \Phi_d(X)$ and $\Phi_n, \Phi_m$ both
+show up in this product.
+\end{proof}
+
+\begin{cor}
+Let $m, n$ be two positive integers and $p$ prime such that $p \nmid mn$. Then
+$\Phi_n(x), \Phi_m(x)$ cannot be both divisible by $p$ for the same value of
+$x$.
+\end{cor}
+
+\begin{proof}
+Suppose $\Phi_n(x) \equiv 0 \pmod{p}$ and $\Phi_m(x) \equiv 0 \pmod{p}$. Then $X
+- x$ is a factor of $\Phi_n(X)$ and $\Phi_m(X)$ in $\FF_p[X]$, which cannot
+happen.
+\end{proof}
+
+For a given prime $p$, we define the standard order $\ord_p(a)$ to be the least
+positive integer $k$ such that $a^k \equiv 1 \pmod{p}$.
+
+Below we give one of the most important theorems in the theory of cyclotomic
+polynomials.
+
+\begin{thm}
+Let $p$ be a prime. Then for all positive integers $n$ and integers $a$ such
+that $\gcd(n, p) = 1$, we have $p \mid \Phi_n(a) \iff \ord_p(a) = n$.
+\end{thm}
+
+\begin{proof}
+We proceed via induction on $n$. The base case $n = 1$ is trivial since
+$\Phi_1(x) = x - 1$ has a root at $x \equiv 1 \pmod{p}$. Now suppose that the
+hypothesis is true for all $k < n$.
+
+Suppose $a$ satisfies $\Phi_n(a) \equiv 0 \pmod{p}$. Recall that $a^n - 1 =
+\prod_{d \mid n} \Phi_d(a) \equiv 0 \pmod{p}$, so $a^n \equiv 1 \pmod{p}$. Now
+suppose that $\ord_p(a) = k \neq n$. By the induction hypothesis, we know that
+$\Phi_k(a) = 0$. We also have $k \mid n$, so $\gcd(k, p) = 1$ implies $p \nmid
+kn$, which contradicts proposition 12. Thus $\ord_p(a) = n$.
+
+Now suppose $\ord_p(a) = n$. Then $\prod_{d \mid n} \Phi_d(a) = a^n - 1 \equiv
+0 \pmod{p}$. If for some $d < n$ we have $\Phi_d(a) \equiv 0 \pmod{p}$, we have
+$\ord_p(a) = d$ by the induction hypothesis so $\prod_{\mathclap{\substack{d
+\mid n \\ d \neq n}}} \Phi_d(a) \not \equiv 0 \pmod{p}$. Thus we necessarily
+have $\Phi_n(a) \equiv 0 \pmod{p}$.
+\end{proof}
+
+We can now finally prove the main theorem.
+
+\begin{thm}[Dirichlet]
+Let $a, n$ be two relatively prime positive integers. Then there exist
+infinitely many primes $p$ of the form $p \equiv a \pmod{n}$.
+\end{thm}
+
+Okay I lied. We actually can't prove that. We can only prove the special case of
+$a = 1$.
+
+\begin{cor}[Dirichlet]
+For any integer $n$ there exist infinitely many primes of the form $p \equiv 1
+\pmod{n}$.
+\end{cor}
+
+We first prove the following lemmas.
+
+\begin{lem}
+Let $p$ be a prime not dividing $n$. If there exists an integer $a$ such that $p
+\mid \Phi_n(a)$, then $p \equiv 1 \pmod{n}$.
+\end{lem}
+
+\begin{proof}
+By theorem 13, we immediately know that $\ord_p(a) = n$, but this implies $n
+\mid p - 1$, or $p - 1 \equiv 0 \pmod{n}$, giving the result.
+\end{proof}
+
+\begin{lem}[Schur]
+Given an integer polynomial $f$, there exist infinitely many primes $p$ such
+that there exists an integer $a_p$ such that $p \mid f(a_p)$.
+\end{lem}
+
+\begin{proof}
+We can write $f(n) = n g(n) + f(0)$. If $f(0) = 0$, then the result is obvious.
+Now suppose $f(0) \neq 0$.
+
+Suppose without loss of generality that $\lim_{n \to \infty} f(n) = +\infty$.
+Let $f(0) = c$. That means there exists a sufficiently large $N$ such that $k >
+N \implies f(k) > |c|$. Pick any of these $k$. Compute
+\[ f(c^2 k!) = c^2 k! g(c^2 k!) + c = c (c k! g(c^2 k!) + 1). \]
+Then $c k! g(c^2 k!) + 1$ must be divisible by some prime. It is also clearly
+not divisible by any prime $p \leq k$ because $k! \equiv 0 \pmod{p}$. Thus this
+is divisible by some prime larger than $k$ so we can just take a sequence of
+sufficiently large $k$ to get our infinite primes.
+\end{proof}
+
+Now we can prove the corollary.
+
+\begin{proof}
+We can use lemma 17 to get infinitely many pairs $p, a_p$ such that $p \mid
+\Phi_n(a_p)$, and we immediately get $p \equiv 1 \pmod{n}$ by lemma 16.
+\end{proof}
+
+The above method can be strengthened into the following proposition, but we do
+not have the tools necessary for proving this, so we will just leave it at that.
+
+\begin{prop}
+For all integers $n$ and integers $a$ such that $a^2 \equiv 1 \pmod{n}$, there
+are infinitely many primes $p$ of the form $p \equiv a \pmod{n}$.
+\end{prop}
+\end{document}
