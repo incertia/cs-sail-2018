@@ -1,3 +1,5 @@
 [submodule "crypto-primer"]
 	path = crypto-primer
 	url = git@github.com:incertia/crypto-primer.git
+	branch = v2
+
