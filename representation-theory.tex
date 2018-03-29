@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\usepackage[nosection]{incertia}
+\usepackage[section]{incertia}
 
 \pagestyle{fancy}
 \lhead{Will Song}
@@ -8,6 +8,10 @@
 \rhead{\today}
 
 \begin{document}
+\textbf{Disclaimer:} The vast majority of this essentially comes from Pavel
+Etingof's \textit{Introduction to Representation Theory} chapter 2.
+
+\section{Introduction}
 Before we actually talk about the representation theory of $\sl(2, \CC)$, we
 first need to talk about the basics.
 
@@ -143,7 +147,27 @@ with a homomorphism of Lie algebras $\rho : \mathfrak{g} \to \End(V)$, where
 $\End(V)$ is a Lie algebra due to the commutator bracket.
 \end{df}
 
+\begin{df}
+The \textbf{universal enveloping algebra} $\mathcal{U}(\mathfrak{g})$ of a Lie
+algebra $\mathfrak{g}$ is the free algebra on $\mathfrak{g}$ modulo the
+relations $xy - yx = [x, y]$.
+\end{df}
+
+\begin{rem}
+One can show that a representation of $\mathfrak{g}$ is essentially the same as
+a represeentation of $\mathcal{U}(\mathfrak{g})$ and vice versa. This makes
+talking about representations of Lie algebras a lot easier because we know a lot
+more about the representation of algebras.
+\end{rem}
+
+\begin{rem}
+We also have a Schur lemma for Lie algebras, but due to representations of Lie
+algebras being the same as representations of their universal enveloping
+algebras, we can just use the normal Schur lemma.
+\end{rem}
+
 \newpage
+\section{Representation Theory}
 Recall that a representation of $\sl(2)$ is just a vector space $V$ with three
 operators $E$, $F$, and $H$, such that $HE - EH = 2E$, $HF - FH = -2F$, and $EF
 - FE = H$, where the corresponding map $\rho$ is given by $\rho(e) = E, \rho(f)
@@ -151,11 +175,11 @@ operators $E$, $F$, and $H$, such that $HE - EH = 2E$, $HF - FH = -2F$, and $EF
 
 Let $V$ be a finite dimensional representation of $\sl(2, \CC)$.
 
-\begin{prb}
+\begin{prop}
 Take eigenvalues of $H$ and pick one with the biggest real part. Call it
 $\lambda$. Let $\bar{V}(\lambda)$ be the generalized eigenspace of $\lambda$.
 Show that $E|_{\bar{V}(\lambda)} = 0$.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 Let $v$ be any element from $\bar{V}(\lambda)$. We show that $Ev = 0$. Namely,
@@ -172,11 +196,11 @@ $H$, but the real part of $\lambda + 2$ if larger than the real part of
 $\lambda$, which contradicts maximality so $Ev = 0$.
 \end{proof}
 
-\begin{prb}
+\begin{prop}
 Let $W$ be any representation of $\sl(2, \CC)$ and let $w \in W$ be a non-zero
 vector such that $Ew = 0$. For any $k > 0$, find a polynomial $P_k(x)$ of degree
 $k$ such that $E^k F^k w = P_k(H) w$.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 \begin{lem}
@@ -229,10 +253,10 @@ show that
 where $P_k(H)$ is obviously a polynomial of degree $k$ in $H$.
 \end{proof}
 
-\begin{prb}
+\begin{prop}
 Let $v \in \bar{V}(\lambda)$ be a generalized eigenvector of $H$ with eigenvalue
 $\lambda$. Show that there exists $N > 0$ such that $F^n v = 0$.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 We claim $F(H - \lambda)^k = (H - (\lambda - 2))^k F$. For the induction step,
@@ -251,9 +275,9 @@ eigenspaces), but the maximal chain of eigenvalues is $\dim V$ long, so we can
 say $F^{\dim V} v = 0$.
 \end{proof}
 
-\begin{prb}
+\begin{prop}
 Show that $H$ is diagonalizable on $\bar{V}(\lambda)$.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 To show that $E$ is diagonalizable on $\bar{V}(\lambda)$, we show that every
@@ -289,9 +313,9 @@ eigenvalue $\lambda$ on $H$. Since this holds for all $v$, it is clear that $H$
 is diagonalizable.
 \end{proof}
 
-\begin{prb}
+\begin{prop}
 Let $N_v$ be the smallest $N$ satisfying (c). Show that $\lambda = N_v - 1$.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 Take $N_v$ as defined and notice that $v, Fv, \dots, F^{N_v - 1} v$ are all
@@ -346,11 +370,11 @@ $\lambda$. Then we have the following sort of diagram
 where $H$ acts as a scalar on each subspace.
 \end{rem}
 
-\begin{prb}
+\begin{prop}
 Show that for each $N > 0$, there exists a unique up to isomorphism irreducible
 representation of $\sl(2)$ of dimension $N$. Compute the matrices $E, F, H$ in
 this representation using a convenient basis.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 Let $V$ be a finite-dimensional irreducible representation of $\sl(2, \CC)$ of
@@ -389,11 +413,11 @@ Denote the $(\lambda + 1)$-dimensional irreducible representation from 6 by
 $V_{\lambda}$. We will eventually show that any finite dimensional
 representation is a direct sum of the $V_{\lambda}$.
 
-\begin{prb}
+\begin{prop}
 Show that the operator $C = EF + FE + \frac{H^2}{2}$ (the so-called
 \textbf{Casimir operator}) commutes with $E, F, H$ and equals $\frac{\lambda
 (\lambda + 2)}{2} \id$ on $V_{\lambda}$.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 We use the identity
@@ -437,10 +461,10 @@ Now we can prove the direct sum decomposition. Namely, assume the contrary and
 let $V$ be a reducible representation of the smallest dimension, which is not a
 direct sum of smaller representations.
 
-\begin{prb}
+\begin{prop}
 Show that $C$ only has one eigenvalue on $V$, namely $\frac{\lambda (\lambda +
 2)}{2}$ for some non-negative integer $\lambda$.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 $V$ is the reducible finite dimensional representation of the smallest dimension
@@ -450,14 +474,14 @@ irreducible subrepresentation. If that subrepresentation is $V_{\lambda}$, then
 that eigenvalue is $\frac{\lambda (\lambda + 2)}{2}$.
 \end{proof}
 
-\begin{prb}
+\begin{prop}
 Show that $V$ has a subrepresentation $W = V_{\lambda}$ such that $V / W =
-V_{\lambda}^{\otimes n}$ for some $n$.
-\end{prb}
+V_{\lambda}^{\oplus n}$ for some $n$.
+\end{prop}
 
 \begin{proof}
 We claim this $V_{\lambda}$ is a subrepresentation of $V$ and $V / V_{\lambda} =
-V_{\lambda}^{\otimes n}$ for some $n$.
+V_{\lambda}^{\oplus n}$ for some $n$.
 
 $V$ is finite dimensional, so it must have some finite dimensional irreducible
 subrepresentation, which we know is isormoprhic to $V_{\lambda}$. Then either $V
@@ -470,19 +494,19 @@ is certainly smaller in dimension compared to $V$ and $V$ was assumed to be the
 smallest dimensional indecomposable yet reducible representation. In this case,
 each of these subrepresentations must be isomorphic to $V_{\lambda}$, because
 $C$ only has the single eigenvalue. In this case, $V / V_{\lambda} =
-V_{\lambda}^{\otimes n}$ for some $n > 1$.
+V_{\lambda}^{\oplus n}$ for some $n > 1$.
 \end{proof}
 
-\begin{prb}
+\begin{prop}
 Deduce from problem 9 that the eigenspace $V(\lambda)$ of $H$ is $(n +
 1)$-dimensional. If $v_1, \dots, v_{n + 1}$ is its basis, show that $F^j v_i$,
 where $1 \leq i \leq n + 1$ and $0 \leq j \leq \lambda$, are linearly
 independent and therefore form a basis of $V$.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 Recall that the eigenspace $V_{\lambda}(\lambda)$ is one dimensional. If $V /
-V_{\lambda} = V_{\lambda}^{\otimes n}$, then $V / V_{\lambda} (\lambda) = n
+V_{\lambda} = V_{\lambda}^{\oplus n}$, then $V / V_{\lambda} (\lambda) = n
 V_{\lambda} (\lambda)$ is $n$-dimensional, so $V(\lambda)$ is $n +
 1$-dimensional.
 
@@ -506,11 +530,11 @@ independent, but their span is precisely $(n + 1)(\lambda + 1)$ dimensional, so
 it is a basis for $V$.
 \end{proof}
 
-\begin{prb}
+\begin{prop}
 Define $W_i = \spn(v_i, Fv_i, \dots, F^{\lambda} v_i)$. Show that $W_i$ are
 subrepresentations of $V$ and derive a contradiction to the fact that $V$ cannot
 be decomposed.
-\end{prb}
+\end{prop}
 
 \begin{proof}
 Let $W_i = \spn(v_i, F v_i, \dots, F^{\lambda} v_i)$. Notice that these are
@@ -521,6 +545,7 @@ decomposed.
 \end{proof}
 
 \newpage
+\section{More problems}
 The following problems can be regarded as ``take-home'' problems. If you found
 this lecture particularly interesting, you may want to look at these to extend
 your knowledge.
@@ -539,7 +564,7 @@ $\sl(2, \CC)$ into irreducible components.
 \begin{prb}
 Let $V = \CC^M \otimes \CC^N$ and $A = J_{0, M} \otimes \id_N + \id_M \otimes
 J_{0, N}$, where $J_{0, n}$ is the Jordan block of size $n$ with eigenvalue
-zero. Find the Jordan normal form of $A$ using 12 and 13.
+zero. Find the Jordan normal form of $A$ using 3.1 and 3.2.
 \end{prb}
 
 The last problem is not related to $\sl(2, \CC)$ but is instead an interesting
